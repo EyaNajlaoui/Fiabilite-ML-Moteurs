@@ -1,110 +1,143 @@
-# Prédiction RUL et Classification de Santé des Moteurs d'Avion
+# Prédiction de la RUL & Classification de Santé des Moteurs d’Avion  
+## Projet basé sur les données NASA C-MAPSS (FD002)
+
+---
 
 ## Présentation du Projet
 
-Ce projet implémente un système de surveillance de santé des moteurs d'avion utilisant les données NASA C-MAPSS. Le système combine des approches paramétriques et non-paramétriques pour la prédiction de la Durée de Vie Résiduelle (RUL) et la classification de l'état de santé des moteurs, démontrant l'application de techniques statistiques et de méthodes d'apprentissage automatique pour la maintenance prédictive dans l'industrie aéronautique.
+Ce projet implémente un système avancé de maintenance prédictive des moteurs d’avion utilisant le dataset NASA C-MAPSS.  
+Il combine l’ingénierie de fiabilité, l’analyse de survie, l’apprentissage automatique et le Deep Learning pour prédire la Durée de Vie Résiduelle (RUL) et classifier l’état de santé des moteurs.
+
+---
 
 ## Fonctionnalités Principales
 
-- **Prédiction RUL** : Estimation des cycles opérationnels restants avant défaillance
-- **Classification de Santé** : Classification binaire de l'état des moteurs (Sain vs Critique)
-- **Analyse de Fiabilité** : Ingénierie de fiabilité utilisant des modèles de survie
-- **Clustering des Régimes** : Identification des modes opérationnels de vol
-- **Validation Croisée** : Validation par 3 folds pour l'évaluation des modèles
-- **Sélection de Variables** : Sélection des capteurs et paramètres les plus prédictifs
+- **Prédiction RUL** : estimation des cycles restants avant défaillance  
+- **Classification de santé** : Sain vs Critique  
+- **Analyse de fiabilité** : Modèles paramétriques (Weibull)  
+- **Analyse de survie** : Kaplan-Meier  
+- **Clustering** : Détection des régimes opérationnels  
+- **Validation croisée** : 3-fold  
+- **Sélection de variables** : Capteurs les plus prédictifs  
 
-## Description des Données
+---
 
-### Jeu de Données NASA C-MAPSS FD002
-- **Unités d'Entraînement** : 260 moteurs avec données jusqu'à défaillance
-- **Unités de Test** : 259 moteurs avec séquences partielles
-- **Capteurs** : 21 capteurs de surveillance mesurant des paramètres moteur
-- **Paramètres Opérationnels** : 3 réglages représentant l'altitude, l'angle de manette et le Mach
-- **Conditions Opérationnelles** : 6 conditions opérationnelles et modes de défaillance
-- **Structure des Données** : Données de séries temporelles multivariées
+## Description du Dataset — NASA C-MAPSS (FD002)
+
+- **Unités d'entraînement** : 260 moteurs  
+- **Unités de test** : 259 moteurs  
+- **Capteurs** : 21 capteurs moteur  
+- **Paramètres opérationnels** : 3 réglages  
+- **Conditions opérationnelles** : 6 conditions différentes  
+- **Données** : Séries temporelles multivariées  
+
+---
 
 ## Méthodologie Implémentée
 
-### Approche Paramétrique (Ingénierie de Fiabilité)
+---
 
-#### Analyse de Distribution de Weibull
-- Ajustement par Maximum de Vraisemblance (MLE)
-- Estimation des paramètres par Méthode des Moments (MOM)
-- Calculs des indicateurs de fiabilité :
-  - MTBF (Temps Moyen Entre Défaillances)
-  - Analyse du taux de défaillance λ(t)
-  - Courbes de fiabilité R(t)
-  - Quantiles de durée de vie (T10, T50, T90)
+## Approche Paramétrique — Ingénierie de Fiabilité
 
-#### Indicateurs de Performance FMDS
-- Fiabilité à 100, 150, 200 cycles
-- Analyse du taux de défaillance instantané
-- Calculs de disponibilité opérationnelle
-- Analyse des modes de défaillance
+### Analyse de la Distribution de Weibull
+- Ajustement MLE  
+- Estimation MOM  
+- Calculs :  
+  - MTBF  
+  - Taux de défaillance λ(t)  
+  - Fiabilité R(t)  
+  - Quantiles : T10, T50, T90  
 
-### Approche Non-Paramétrique (Analyse de Survie)
+### Indicateurs FMDS
+- Fiabilité à 100, 150 et 200 cycles  
+- Disponibilité opérationnelle  
+- Analyse des modes de défaillance  
 
-#### Estimateur de Kaplan-Meier
-- Estimation de la fonction de survie empirique
-- Calcul de la durée de vie médiane
-- Intervalles de confiance
-- Comparaison de modèles avec Weibull
+---
 
-#### Analyse de Survie
-- Courbes de survie empiriques
-- Fonctions de répartition cumulatives
-- Tests de comparaison de modèles
+## Approche Non-Paramétrique — Analyse de Survie
 
-### Implémentation d'Apprentissage Automatique
+### Estimateur de Kaplan-Meier
+- Fonction de survie empirique  
+- Durée de vie médiane  
+- Intervalles de confiance  
+- Comparaison avec Weibull  
 
-#### Classification de Santé (Sain vs Critique)
-- **Modèles utilsés** :
-- Decision Tree Classifier
-- Random Forest Classifier
+### Analyse complémentaire
+- Courbes de survie  
+- Fonctions cumulatives  
+- Tests de comparaison  
+
+---
+
+## Apprentissage Automatique — Classification de Santé
+
+### Modèles utilisés
+- Decision Tree  
+- Random Forest  
 - Support Vector Machine (SVM)
- ### Meilleur Modèle : Random Forest Classifier**
-### Performance du Random Forest :
-- Accuracy : 96.63%
-- Precision : 97.65%
-- Recall : 96.63%
-- F1-Score : 97.01%
-- AUC ROC : 98.06%
 
+### **Meilleur modèle : Random Forest**
+- **Accuracy** : 96.63%  
+- **Precision** : 97.65%  
+- **Recall** : 96.63%  
+- **F1-Score** : 97.01%  
+- **AUC ROC** : 98.06%  
 
-#### Prédiction RUL (LSTM)
-- **Architecture** : LSTM à 3 couches (128-64-32 neurones)
-- **Validation Croisée** : 3 folds stratifiés
-- **Optimisation** : Optimiseur Adam (Taux d'Apprentissage=0.05)
-- **Régularisation** : Dropout, Normalisation par lots
-- **Arrêt Précoce** : Patience de 15 époques
-- **Sélection de Variables** : Top 15 des variables les plus importantes
- ### Performance LSTM :
-- R²: 0.8317
-- RMSE: 24.55
-- MAE: 19.03
+---
 
-#### Clustering des Régimes Opérationnels
-- **K-Means** : 6 régimes opérationnels identifiés
-- **Standardisation** : Normalisation des paramètres
-- **Visualisation 3D** : Espace des paramètres opérationnels
+## Deep Learning — Prédiction RUL (LSTM)
+
+### Architecture du modèle
+- 3 couches LSTM : **128 → 64 → 32 neurones**  
+- Fenêtre temporelle : 30 cycles  
+- Optimiseur : Adam (LR = 0.05)  
+- Régularisation : Dropout + BatchNorm  
+- Early stopping : patience = 15  
+- Sélection des 15 variables les plus importantes  
+
+### Performances
+- **R² : 0.8317**  
+- **RMSE : 24.55**  
+- **MAE : 19.03**  
+
+---
+
+## Clustering des Régimes Opérationnels
+
+- Méthode : K-Means  
+- Nombre de clusters : 6  
+- Standardisation  
+- Visualisation 3D  
+
+---
 
 ## Architecture Technique
 
-### Prétraitement des Données
-- Nettoyage et validation des données capteurs
-- Calcul du RUL à partir des données de cycles
-- Création de séquences temporelles (fenêtre=30 cycles)
-- Normalisation StandardScaler
-- Gestion des valeurs manquantes
+### Prétraitement
+- Nettoyage des données  
+- Calcul RUL  
+- Séquences temporelles (fenêtre=30)  
+- Normalisation (StandardScaler)  
+- Gestion des valeurs manquantes  
 
 ### Ingénierie des Variables
-- Sélection des capteurs les plus informatifs
-- Intégration des régimes opérationnels
-- Création de caractéristiques statistiques (moyenne, écart-type, percentiles)
-- Analyse de corrélation entre capteurs
+- Sélection des capteurs  
+- Intégration des clusters  
+- Extraction de features statistiques  
+- Analyse de corrélation  
 
-### Validation et Métriques
-- **Classification** : Exactitude, Précision, Rappel, F1-Score, ROC-AUC
-- **Régression** : MSE, RMSE, MAE, R²
-- **Validation Croisée** : 3 folds pour prévenir le surapprentissage
-- **Arrêt Précoce** : Patience de 15 époques
+### Métriques & Validation
+- **Classification** : Accuracy, Precision, Recall, F1, ROC-AUC  
+- **Régression** : MSE, RMSE, MAE, R²  
+- Cross-validation (3-fold)  
+- Early stopping  
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/EyaNajlaoui/Fiabilite-ML-Moteurs.git
+cd Fiabilite-ML-Moteurs
+pip install -r requirements.txt
