@@ -62,8 +62,8 @@ Ce projet implémente un système de surveillance de santé des moteurs d'avion 
 - Decision Tree Classifier
 - Random Forest Classifier
 - Support Vector Machine (SVM)
-- **Meilleur Modèle : Random Forest Classifier**
-## Performance du Random Forest :
+  **Meilleur Modèle : Random Forest Classifier**
+### Performance du Random Forest :
 - Accuracy : 96.63%
 - Precision : 97.65%
 - Recall : 96.63%
