@@ -20,7 +20,7 @@ Ce projet implémente un système de surveillance de santé des moteurs d'avion 
 - **Unités de Test** : 259 moteurs avec séquences partielles
 - **Capteurs** : 21 capteurs de surveillance mesurant des paramètres moteur
 - **Paramètres Opérationnels** : 3 réglages représentant l'altitude, l'angle de manette et le Mach
-- **Conditions Opérationnelles** : Conditions multiples et modes de défaillance
+- **Conditions Opérationnelles** : 6 conditions opérationnelles et modes de défaillance
 - **Structure des Données** : Données de séries temporelles multivariées
 
 ## Méthodologie Implémentée
@@ -58,9 +58,18 @@ Ce projet implémente un système de surveillance de santé des moteurs d'avion 
 ### Implémentation d'Apprentissage Automatique
 
 #### Classification de Santé (Sain vs Critique)
-- **Random Forest** : 100 estimateurs, critère Gini
-- **XGBoost** : Gradient boosting
-- **SVM** : Machines à vecteurs de support avec noyau RBF
+- **Modèles utilsés** :
+- Decision Tree Classifier
+- Random Forest Classifier
+- Support Vector Machine (SVM)
+- **Meilleur Modèle : Random Forest Classifier**
+## Performance du Random Forest :
+- Accuracy : 96.63%
+- Precision : 97.65%
+- Recall : 96.63%
+- F1-Score : 97.01%
+- AUC ROC : 98.06%
+
 
 #### Prédiction RUL (LSTM)
 - **Architecture** : LSTM à 3 couches (128-64-32 neurones)
